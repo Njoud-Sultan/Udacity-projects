@@ -64,7 +64,7 @@ def venues():
     #       num_shows should be aggregated based on number of upcoming shows per venue.
     data = []
     # query locations by city and state combined
-    locations = db.session.query(Venue.city, Venue.state)
+    locations = db.session.query(Venue.city, Venue.state).distinct(Venue.city, Venue.state)
 
     # get the venue IDs and names existing for each location filtered by city and status
     # then add to the data set
@@ -418,7 +418,7 @@ def create_artist_submission():
                     website=form.website.data,
                     facebook_link=form.facebook_link.data,
                     image_link=form.image_link.data,
-                    seeking_talent=True if form.seeking.data == 'Yes' else False,
+                    seeking_venue=True if form.seeking.data == 'Yes' else False,
                     seeking_description=form.seeking_description.data)
 
     try:
